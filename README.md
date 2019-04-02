@@ -16,9 +16,10 @@ https://ethereum-magicians.org/t/eip-erc-app-keys-application-specific-wallet-ac
 
 [Use `eth-hd-keyring` branch `appKeys` (either npm link or install in proper folders)](https://github.com/MetaMask/eth-hd-keyring/tree/appKeys)
 
-run `node index.js` in appKeys folder to launch dummy website for testing
+Clone this repo to have a dummy website for testing and use `npm run start`.
 
-when modifying source.js, run `browserify source.js > bundle.js`
+After modifying `source.js`, kill and restart.
+Or you can use `npm run compile` in another console.
 
 # Test
 
