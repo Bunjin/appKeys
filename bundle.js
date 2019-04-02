@@ -22393,35 +22393,39 @@ if (typeof web3 !== 'undefined') {
 var mainAccount = "0x0"
 
 function testGetPublicKey(hdPath){
-  provider.sendAsync(
-    {
-      method: "appKey_eth_getPublicKey",
-      params: hdPath
-    },
-    function(err, result) {
-      if (err) {
-	return console.error(err);
+  return new Promise(function(resolve, reject){
+    provider.sendAsync(
+      {
+	method: "appKey_eth_getPublicKey",
+	params: hdPath
+      },
+      function(err, result) {
+	if (err) {
+	  return console.error(err);
+	}
+	console.log(result)
+	return resolve(result.result)
       }
-      console.log(result)
-      return Promise.resolve(result)
-    }
-  )
+    )
+  })
 }
 
 function testGetAddress(hdPath){
-  provider.sendAsync(
-    {
-      method: "appKey_eth_getAddress",
-      params: hdPath
-    },
-    function(err, result) {
-      if (err) {
-	return console.error(err);
+  return new Promise(function(resolve, reject){
+    provider.sendAsync(
+      {
+	method: "appKey_eth_getAddress",
+	params: hdPath
+      },
+      function(err, result) {
+	if (err) {
+	  return console.error(err);
+	}
+	console.log(result)
+	return resolve(result.result)
       }
-      console.log(result)
-      return Promise.resolve(result)
-    }
-  )
+    )
+  })
 }
 
 
@@ -22489,12 +22493,12 @@ async function testSignMsgStark(hdPath, message){
 testGetPublicKey("0/1")
 testGetAddress("0/1")
 
-//testGetPublicKey("1'/0")
-//testGetAddress("1'/0")
-//testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
-//testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
+testGetPublicKey("1'/0")
+testGetAddress("1'/0")
+testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
+testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
 
-//testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1")
+testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1")
 
 },{"web3":155}],155:[function(require,module,exports){
 var Web3 = require('./lib/web3');
