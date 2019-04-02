@@ -24,10 +24,12 @@ when modifying source.js, run `browserify source.js > bundle.js`
 
 HD Paths
 
-localhost
+localhost:
+
 `m/43'/60'/1775'/ [personaPath] /1396221098'/30421367'/1913926186'/661558778'/2091524667'/1834949338'/925307131'/689768053'/107'/ [subPath]`
 
 bunjin.github.io:
+
 `m/43'/60'/1775'/ [personaPath] /1797325644'/1396991353'/426541327'/193811525'/1119920421'/909605457'/64242277'/1029069725'/207'/ [subPath]`
 
 navigate to `localhost:8000`
