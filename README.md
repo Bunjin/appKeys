@@ -46,6 +46,26 @@ https://bunjin.github.io/appKeys/
 
 ### stark
 
+* `appKey_stark_signMessage(subHdPath, message)`
+
+message should be 32 bytes
+
+```
+provider.sendAsync(
+    {
+      method: "appKey_stark_signMessage",
+      params: [hdPath, message],
+    },
+    function(err, result){
+      if (err) {
+	return console.error(err);
+      }
+      console.log(result)
+      return result
+    }
+)
+```
+
 ### other cryptos like Bitcoin
 
 ## ecdh [TBD]
