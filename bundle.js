@@ -22484,17 +22484,69 @@ async function testSignMsgStark(subHdPath, message){
   )
 }
 
+async function  testSignTypedMessage(subHdPath, msgString, msgUint){
+  let from = await testGetAddress(subHdPath)  
+  const finalMessage = prepareTypedMessage(from, msgString, msgUint)
+  console.log(finalMessage)
+  return new Promise(function(resolve, reject){
+      provider.sendAsync(
+	{
+	  method: "appKey_eth_signTypedMessage",
+	  params: [from, finalMessage],
+	}, function(err, result){
+	  console.log("eth_signTypedMessage for ", subHdPath, msgString, msgUint)      
+	  console.log(result)
+	  return resolve(result)
+	}
+      )
+    })
+  }
 
 
-testGetPublicKey("0/1")
-testGetAddress("0/1")
+function prepareTypedMessage(fromAccount, msgString, msgUint){
+  // // EIP 712 data
+  const domain = [
+    { name: "name", type: "string" },
+    { name: "version", type: "string" },
+    { name: "chainId", type: "uint256" },
+    { name: "salt", type: "bytes32" }
+  ]
+  const dummyStruct = [
+    {name: "msgString", type: "string"},
+    {name: "msgUint", type: "uint"}
+  ]
 
-testGetPublicKey("1'/0")
-testGetAddress("1'/0")
-testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
-testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
+  const domainData = {
+    name: "MetaMask Dummy Plugin",
+    version: "1",
+    chainId: "1",
+    salt: "0x12345611111111111"
+  }
 
-testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1")
+  let finalMessage = JSON.stringify({
+    types: {
+      EIP712Domain: domain,
+      Struct: dummyStruct,
+    },
+    domain: domainData,
+    primaryType: "Struct",
+    message: { "msgString": msgString,
+	       "msgUint": msgUint}
+  })
+  return finalMessage
+}
+
+// testGetPublicKey("0/1")
+// testGetAddress("0/1")
+
+// testGetPublicKey("1'/0")
+// testGetAddress("1'/0")
+// testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
+// testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
+
+// testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1")
+
+testSignTypedMessage("1'/0", "hello world", 2)
 
 },{"web3":155}],155:[function(require,module,exports){
 var Web3 = require('./lib/web3');
