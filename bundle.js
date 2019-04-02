@@ -22487,14 +22487,13 @@ async function testSignMsgStark(subHdPath, message){
 async function  testSignTypedMessage(subHdPath, msgString, msgUint){
   let from = await testGetAddress(subHdPath)  
   const finalMessage = prepareTypedMessage(from, msgString, msgUint)
-  console.log(finalMessage)
   return new Promise(function(resolve, reject){
       provider.sendAsync(
 	{
 	  method: "appKey_eth_signTypedMessage",
 	  params: [from, finalMessage],
 	}, function(err, result){
-	  console.log("eth_signTypedMessage for ", subHdPath, msgString, msgUint)      
+	  console.log("eth_signTypedMessage for ", subHdPath, msgString, msgUint, finalMessage)      
 	  console.log(result)
 	  return resolve(result)
 	}
@@ -22536,15 +22535,15 @@ function prepareTypedMessage(fromAccount, msgString, msgUint){
   return finalMessage
 }
 
-// testGetPublicKey("0/1")
-// testGetAddress("0/1")
+testGetPublicKey("0/1")
+testGetAddress("0/1")
 
-// testGetPublicKey("1'/0")
-// testGetAddress("1'/0")
-// testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
-// testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
+testGetPublicKey("1'/0")
+testGetAddress("1'/0")
+testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
+testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
 
-// testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1")
+testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1")
 
 testSignTypedMessage("1'/0", "hello world", 2)
 
