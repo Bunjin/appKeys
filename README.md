@@ -44,6 +44,12 @@ https://bunjin.github.io/appKeys/
 
 # API
 
+## enabling app keys:
+
+for now they are enabled automatically
+
+.enable() specified in EIP is not implemented
+
 ## ec keys
 
 * `appKey_ec_getPublicKey(subHdPath)`
@@ -54,6 +60,7 @@ same as `appKey_eth_getPublicKey(subHdPath)`
 ## ecdsa signing
 
 ### eth
+
 * `appKey_eth_signMessage(subHdPath, message)`
 * `appKey_eth_signTransaction(subHdPath, tx)`
 * `appKey_eth_signTypedMessage(subHdPath, typedData)`
