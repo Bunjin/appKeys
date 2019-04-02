@@ -21,6 +21,8 @@ Use the github pages hosted version: https://bunjin.github.io/appKeys/
 Or clone this repo to have a dummy website for testing and use `npm run start`.
 Then navigate to `localhost:8000`
 
+Testing functions are in [source.js file](source.js)
+
 After modifying `source.js`, kill and restart.
 Or you can use `npm run compile` in another console.
 
@@ -37,12 +39,7 @@ bunjin.github.io:
 `m/43'/60'/1775'/ [personaPath] /1797325644'/1396991353'/426541327'/193811525'/1119920421'/909605457'/64242277'/1029069725'/207'/ [subPath]`
 
 
-
-or use the github pages hosted version:
-https://bunjin.github.io/appKeys/
-
-
-# HD Path
+# HD Path Specs
 
 `m / [standardized Path Beginning]' / [persona path]' / [application uniquely assigned path]' / [app's custom subpath]`
 
