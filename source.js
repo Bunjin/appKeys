@@ -1,11 +1,5 @@
 // App Keys test
 
-// Todo main:
-// [] change params of sign methods to hdPath
-// [] implement vanilla sign
-
-// Todo test:
-// 
 let Web3 = require('web3')
 
 if (typeof web3 !== 'undefined') {
@@ -16,19 +10,18 @@ if (typeof web3 !== 'undefined') {
   console.log('No web3? You should consider trying MetaMask!')
 }
 
-var mainAccount = "0x0"
-
-function testGetPublicKey(hdPath){
+function testGetPublicKey(subHdPath){
   return new Promise(function(resolve, reject){
     provider.sendAsync(
       {
 	method: "appKey_eth_getPublicKey",
-	params: hdPath
+	params: subHdPath
       },
       function(err, result) {
 	if (err) {
 	  return console.error(err);
 	}
+	console.log("eth_getPublicKey for ", subHdPath)
 	console.log(result)
 	return resolve(result.result)
       }
@@ -36,17 +29,18 @@ function testGetPublicKey(hdPath){
   })
 }
 
-function testGetAddress(hdPath){
+function testGetAddress(subHdPath){
   return new Promise(function(resolve, reject){
     provider.sendAsync(
       {
 	method: "appKey_eth_getAddress",
-	params: hdPath
+	params: subHdPath
       },
       function(err, result) {
 	if (err) {
 	  return console.error(err);
 	}
+	console.log("eth_getAddress for ", subHdPath)
 	console.log(result)
 	return resolve(result.result)
       }
@@ -55,8 +49,8 @@ function testGetAddress(hdPath){
 }
 
 
-async function testSignTx(hdPath, to, value, nonce){
-  let from = await testGetAddress(hdPath)
+async function testSignTx(subHdPath, to, value, nonce){
+  let from = await testGetAddress(subHdPath)
   let txParams = {
     "from": from,
     "to": to,
@@ -66,48 +60,50 @@ async function testSignTx(hdPath, to, value, nonce){
     "nonce": nonce,
     "data": "0x"
   }
-  console.log(txParams)
   result = await provider.sendAsync(
     {
       method: "appKey_eth_signTransaction",
-      params: [hdPath, txParams],
+      params: [subHdPath, txParams],
     },
     function(err, result){
       if (err) {
 	return console.error(err);
       }
+      console.log("eth_signTransaction for ", subHdPath, txParams)
       console.log(result)
       return result
     }
   )
 }
 
-async function testSignMsg(hdPath, message){
+async function testSignMsg(subHdPath, message){
   result = await provider.sendAsync(
     {
       method: "appKey_eth_signMessage",
-      params: [hdPath, message],
+      params: [subHdPath, message],
     },
     function(err, result){
       if (err) {
 	return console.error(err);
       }
+      console.log("eth_signMessage for ", subHdPath, message)
       console.log(result)
       return result
     }
   )
 }
 
-async function testSignMsgStark(hdPath, message){
+async function testSignMsgStark(subHdPath, message){
   result = await provider.sendAsync(
     {
       method: "appKey_stark_signMessage",
-      params: [hdPath, message],
+      params: [subHdPath, message],
     },
     function(err, result){
       if (err) {
 	return console.error(err);
       }
+      console.log("stark_signMessage for ", subHdPath, message)      
       console.log(result)
       return result
     }

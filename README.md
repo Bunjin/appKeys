@@ -77,7 +77,7 @@ message should be 32 bytes
 provider.sendAsync(
     {
       method: "appKey_stark_signMessage",
-      params: [hdPath, message],
+      params: [subHdPath, message],
     },
     function(err, result){
       if (err) {
