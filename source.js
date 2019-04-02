@@ -113,7 +113,7 @@ async function testSignMsgStark(hdPath, message){
 
 
 testGetPublicKey("0/1")
-//testGetAddress("0/1")
+testGetAddress("0/1")
 
 //testGetPublicKey("1'/0")
 //testGetAddress("1'/0")
