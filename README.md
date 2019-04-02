@@ -46,9 +46,18 @@ https://bunjin.github.io/appKeys/
 
 ## ec keys
 
+* `appKey_ec_getPublicKey(subHdPath)`
+same as `appKey_eth_getPublicKey(subHdPath)`
+
+* `appKey_eth_getAddress(subHdPath)`
+
 ## ecdsa signing
 
 ### eth
+* `appKey_eth_signMessage(subHdPath, message)`
+* `appKey_eth_signTransaction(subHdPath, tx)`
+* `appKey_eth_signTypedMessage(subHdPath, typedData)`
+
 
 ### stark
 
