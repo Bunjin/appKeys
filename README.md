@@ -50,9 +50,9 @@ for now they are enabled automatically
 
 .enable() specified in EIP is not implemented
 
-## ec keys
+## ecc keys
 
-* `appKey_ec_getPublicKey(subHdPath)`
+* `appKey_ecc_getPublicKey(subHdPath)`
 same as `appKey_eth_getPublicKey(subHdPath)`
 
 * `appKey_eth_getAddress(subHdPath)`
