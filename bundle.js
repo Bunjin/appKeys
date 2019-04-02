@@ -22395,9 +22395,7 @@ function testGetPublicKey(subHdPath){
 	if (err) {
 	  return console.error(err);
 	}
-	console.log("eth_getPublicKey for ", subHdPath)
-	console.log(result)
-	return resolve(result.result)
+	return resolve(result)
       }
     )
   })
@@ -22414,9 +22412,7 @@ function testGetAddress(subHdPath){
 	if (err) {
 	  return console.error(err);
 	}
-	console.log("eth_getAddress for ", subHdPath)
-	console.log(result)
-	return resolve(result.result)
+	return resolve(result)
       }
     )
   })
@@ -22424,7 +22420,7 @@ function testGetAddress(subHdPath){
 
 
 async function testSignTx(subHdPath, to, value, nonce){
-  let from = await testGetAddress(subHdPath)
+  let from = (await testGetAddress(subHdPath)).result
   let txParams = {
     "from": from,
     "to": to,
@@ -22434,67 +22430,65 @@ async function testSignTx(subHdPath, to, value, nonce){
     "nonce": nonce,
     "data": "0x"
   }
-  result = await provider.sendAsync(
-    {
-      method: "appKey_eth_signTransaction",
-      params: [subHdPath, txParams],
-    },
-    function(err, result){
-      if (err) {
-	return console.error(err);
+  return new Promise(function(resolve, reject){
+    provider.sendAsync(
+      {
+	method: "appKey_eth_signTransaction",
+	params: [subHdPath, txParams],
+      },
+      function(err, result){
+	if (err) {
+	  return console.error(err);
+	}
+	return resolve(result)
       }
-      console.log("eth_signTransaction for ", subHdPath, txParams)
-      console.log(result)
-      return result
-    }
-  )
+    )
+  })
 }
 
 async function testSignMsg(subHdPath, message){
-  result = await provider.sendAsync(
-    {
-      method: "appKey_eth_signMessage",
-      params: [subHdPath, message],
-    },
-    function(err, result){
-      if (err) {
-	return console.error(err);
+  return new Promise(function(resolve, reject){
+    provider.sendAsync(
+      {
+	method: "appKey_eth_signMessage",
+	params: [subHdPath, message],
+      },
+      function(err, result){
+	if (err) {
+	  return console.error(err);
+	}
+	return resolve(result)
       }
-      console.log("eth_signMessage for ", subHdPath, message)
-      console.log(result)
-      return result
-    }
-  )
+    )
+  })
 }
 
 async function testSignMsgStark(subHdPath, message){
-  result = await provider.sendAsync(
-    {
-      method: "appKey_stark_signMessage",
-      params: [subHdPath, message],
-    },
-    function(err, result){
-      if (err) {
-	return console.error(err);
+  return new Promise(function(resolve, reject){
+    provider.sendAsync(
+      {
+	method: "appKey_stark_signMessage",
+	params: [subHdPath, message],
+      },
+      function(err, result){
+	if (err) {
+	  return console.error(err);
+	}
+	return resolve(result)
       }
-      console.log("stark_signMessage for ", subHdPath, message)      
-      console.log(result)
-      return result
-    }
-  )
+    )
+  })
 }
 
 async function  testSignTypedMessage(subHdPath, msgString, msgUint){
-  let from = await testGetAddress(subHdPath)  
+  let from = (await testGetAddress(subHdPath)).result
   const finalMessage = prepareTypedMessage(from, msgString, msgUint)
   return new Promise(function(resolve, reject){
       provider.sendAsync(
 	{
 	  method: "appKey_eth_signTypedMessage",
-	  params: [from, finalMessage],
+	  params: [subHdPath, finalMessage],
 	}, function(err, result){
-	  console.log("eth_signTypedMessage for ", subHdPath, msgString, msgUint, finalMessage)      
-	  console.log(result)
 	  return resolve(result)
 	}
       )
@@ -22535,17 +22529,32 @@ function prepareTypedMessage(fromAccount, msgString, msgUint){
   return finalMessage
 }
 
-testGetPublicKey("0/1")
-testGetAddress("0/1")
 
-testGetPublicKey("1'/0")
-testGetAddress("1'/0")
-testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
-testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0")
 
-testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1")
 
-testSignTypedMessage("1'/0", "hello world", 2)
+
+
+
+
+async function main(){
+  console.log("eth_getPublicKey for 0/1")
+  console.log(await testGetPublicKey("0/1"))
+  console.log("eth_getAddress for 0/1")  
+  console.log(await testGetAddress("0/1"))
+  console.log("eth_getPublicKey for 1'/0")  
+  console.log(await testGetPublicKey("1'/0"))
+  console.log("eth_signMessage for 1'/0")  
+  console.log(await testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0"))
+  console.log("stark_signMessage for 1'/0")    
+  console.log(await testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0"))
+  console.log("eth_signTransaction for 1'/0")    
+  console.log(await testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1"))
+  console.log("eth_signTypedMessage for 1'/0")    
+  console.log(await testSignTypedMessage("1'/0", "hello world", 2))
+}
+
+
+main()
 
 },{"web3":155}],155:[function(require,module,exports){
 var Web3 = require('./lib/web3');
