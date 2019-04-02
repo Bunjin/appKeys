@@ -38,16 +38,16 @@ https://bunjin.github.io/appKeys/
 
 # API
 
-ec keys:
+## ec keys
 
-ecdsa
+## ecdsa signing
 
-eth
+### eth
 
-stark
+### stark
 
-next:
+### other cryptos like Bitcoin
 
-ecdh ...
+## ecdh [TBD]
 
 
