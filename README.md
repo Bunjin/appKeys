@@ -17,7 +17,9 @@ https://ethereum-magicians.org/t/eip-erc-app-keys-application-specific-wallet-ac
 [Use `eth-hd-keyring` branch `appKeys` (either npm link or install in proper folders)](https://github.com/MetaMask/eth-hd-keyring/tree/appKeys)
 
 Use the github pages hosted version: https://bunjin.github.io/appKeys/
-or clone this repo to have a dummy website for testing and use `npm run start`.
+
+Or clone this repo to have a dummy website for testing and use `npm run start`.
+Then navigate to `localhost:8000`
 
 After modifying `source.js`, kill and restart.
 Or you can use `npm run compile` in another console.
@@ -34,7 +36,7 @@ bunjin.github.io:
 
 `m/43'/60'/1775'/ [personaPath] /1797325644'/1396991353'/426541327'/193811525'/1119920421'/909605457'/64242277'/1029069725'/207'/ [subPath]`
 
-navigate to `localhost:8000`
+
 
 or use the github pages hosted version:
 https://bunjin.github.io/appKeys/
