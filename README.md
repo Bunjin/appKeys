@@ -6,6 +6,7 @@ https://github.com/ethereum/EIPs/pull/1775
 see discussion here:
 https://ethereum-magicians.org/t/eip-erc-app-keys-application-specific-wallet-accounts/2742
 
+
 # Setup
 
 [Use `metamask-extension` branch `appKeys`](https://github.com/MetaMask/metamask-extension/tree/appKeys)
@@ -35,6 +36,9 @@ or use the github pages hosted version:
 https://bunjin.github.io/appKeys/
 
 
+# HD Path
+
+`m / [standardized Path Beginning]' / [persona path]' / [application uniquely assigned path]' / [app's custom subpath]`
 
 # API
 
