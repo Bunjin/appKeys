@@ -163,18 +163,25 @@ function prepareTypedMessage(fromAccount, msgString, msgUint){
 
 
 async function main(){
+
   console.log("eth_getPublicKey for 0/1")
   console.log(await testGetPublicKey("0/1"))
+  
   console.log("eth_getAddress for 0/1")  
   console.log(await testGetAddress("0/1"))
+  
   console.log("eth_getPublicKey for 1'/0")  
   console.log(await testGetPublicKey("1'/0"))
+  
   console.log("eth_signMessage for 1'/0")  
   console.log(await testSignMsg("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0"))
+  
   console.log("stark_signMessage for 1'/0")    
   console.log(await testSignMsgStark("1'/0", "1e542e2da71b3f5d7b4e9d329b4d30ac0b5d6f266ebef7364bf61c39aac35d0" + "0"))
+  
   console.log("eth_signTransaction for 1'/0")    
   console.log(await testSignTx("1'/0", "0xbab49c2bfbc4a5a62ccdcd405380515fe62efd64", 1, "0x1"))
+  
   console.log("eth_signTypedMessage for 1'/0")    
   console.log(await testSignTypedMessage("1'/0", "hello world", 2))
 }
