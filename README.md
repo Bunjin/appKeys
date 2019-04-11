@@ -14,10 +14,24 @@ https://ethereum-magicians.org/t/eip-erc-app-keys-application-specific-wallet-ac
 
 [Use `metamask-extension` branch `appKeys`](https://github.com/MetaMask/metamask-extension/tree/appKeys)
 
+`nvm use` to use proper node version (v8.15.1 at time of writing)
+
+`npm install` i
+in `node_module` remove the 2 below packages
+
+then clone then in one level above root folder of metamask-extension (create node_module folder)
+
+and there clone the packages below
 [Use `eth-keyring-controller` branch `appKeys` (either npm link or install in proper folders)](https://github.com/MetaMask/KeyringController/tree/appKeys)
+
+repeat nvm and install
+
+and remove eth-hd-keyring from eth-keyring-controller (node_modules)
 
 
 [Use `eth-hd-keyring` branch `appKeys` (either npm link or install in proper folders)](https://github.com/MetaMask/eth-hd-keyring/tree/appKeys)
+
+
 
 Use the github pages hosted version: https://bunjin.github.io/appKeys/
 
